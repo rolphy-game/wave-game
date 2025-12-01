@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Waves"
+run/main_scene="uid://2f3axxmf3kj5"
+config/features=PackedStringArray("4.5", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+global_signals="*res://Globals/global_signals.gd"
+global_levels="*res://Globals/global_levels.gd"
+Transition="*res://UI/transition.tscn"
+Music="*res://Music/music.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[layer_names]
+
+2d_physics/layer_1="Bullet"
+2d_physics/layer_2="Obstacle"
+2d_physics/layer_3="End"
+2d_physics/layer_4="Bonus"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

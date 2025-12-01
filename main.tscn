@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://2f3axxmf3kj5"]
+
+[ext_resource type="Script" uid="uid://cryilmqqtvgqb" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dh3y68tvgu2t6" path="res://UI/title.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="Game" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" parent="CanvasLayer/UI" instance=ExtResource("2_0xm2m")]
+layout_mode = 1

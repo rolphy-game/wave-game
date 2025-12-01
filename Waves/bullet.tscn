@@ -1,0 +1,118 @@
+[gd_scene load_steps=15 format=3 uid="uid://ulsvbodt2oho"]
+
+[ext_resource type="Texture2D" uid="uid://cb03igkifpu3f" path="res://Waves/circle.png" id="1_6w5qv"]
+[ext_resource type="Script" uid="uid://c6hwt03bfs7xp" path="res://Waves/bullet.gd" id="1_276dk"]
+[ext_resource type="Texture2D" uid="uid://dtpg5lblqwb7d" path="res://Waves/star_04.png" id="3_rqgh8"]
+[ext_resource type="AudioStream" uid="uid://bohi4c6qo5cth" path="res://Music/explosion.mp3" id="4_rqgh8"]
+[ext_resource type="AudioStream" uid="uid://cjahyt2f5vyex" path="res://Music/magnet_start.wav" id="5_44pet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8qja"]
+
+[sub_resource type="Curve" id="Curve_44pet"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.719697, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yolmd"]
+curve = SubResource("Curve_44pet")
+
+[sub_resource type="Curve" id="Curve_d6krl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.52307695, 1), 0.0, 0.0, 0, 0, Vector2(0.9924243, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7rqah"]
+curve = SubResource("Curve_d6krl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u4yqw"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.0
+angle_min = -49.99999
+angle_max = 50.00001
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 227.17
+angular_velocity_min = -352.54
+angular_velocity_max = 330.34998
+orbit_velocity_min = -0.09999991
+orbit_velocity_max = 0.1000001
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_7rqah")
+color = Color(0.9607843, 0.6431373, 0.72156864, 1)
+alpha_curve = SubResource("CurveTexture_yolmd")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.009999977
+
+[sub_resource type="Curve" id="Curve_276dk"]
+_data = [Vector2(0, 0.011235952), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.11794872, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_rqgh8"]
+curve = SubResource("Curve_276dk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_276dk"]
+particle_flag_disable_z = true
+angle_min = -225.59999
+angle_max = 34.00001
+direction = Vector3(-1, 0, 0)
+spread = 6.429
+initial_velocity_min = 20.01
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_rqgh8")
+
+[node name="Bullet" type="Area2D"]
+collision_mask = 14
+script = ExtResource("1_276dk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_6w5qv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v8qja")
+
+[node name="ParticlesDead" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 100
+texture = ExtResource("3_rqgh8")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_u4yqw")
+
+[node name="ParticlesWin" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 5000
+texture = ExtResource("3_rqgh8")
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_u4yqw")
+
+[node name="ParticlesRun" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+amount = 400
+texture = ExtResource("3_rqgh8")
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_276dk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_rqgh8")
+
+[node name="WinSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_44pet")
+pitch_scale = 0.7

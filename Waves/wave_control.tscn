@@ -1,0 +1,392 @@
+[gd_scene load_steps=14 format=3 uid="uid://df2uipwqakwwc"]
+
+[ext_resource type="Texture2D" uid="uid://bfhhfle3ocvhd" path="res://UI/Sprites/grabber.png" id="1_a64ab"]
+[ext_resource type="Script" uid="uid://dippu5rlvfmyd" path="res://Waves/wave_control.gd" id="1_opshw"]
+[ext_resource type="PackedScene" uid="uid://ugw4wvj6cf5n" path="res://Waves/wave_creator.tscn" id="2_2kc0d"]
+[ext_resource type="Script" uid="uid://d0g023v4mkb4x" path="res://Waves/wave.gd" id="3_u56kn"]
+[ext_resource type="Texture2D" uid="uid://bgad20ruwkytr" path="res://UI/Sprites/monitor.png" id="4_u56kn"]
+[ext_resource type="Theme" uid="uid://msjsp8wfk88q" path="res://UI/button_theme.tres" id="5_eho6i"]
+[ext_resource type="Texture2D" uid="uid://dd2wehtcf7k5h" path="res://UI/Sprites/launch.png" id="6_h7bam"]
+[ext_resource type="Texture2D" uid="uid://g1sg0dwdj0ob" path="res://UI/Sprites/more_less.png" id="7_h7bam"]
+[ext_resource type="Texture2D" uid="uid://bp3afyp5cpvsy" path="res://UI/Sprites/exit.png" id="9_y3a5i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7bam"]
+bg_color = Color(0.05882353, 0.4745098, 0.32941177, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="SystemFont" id="SystemFont_a64ab"]
+font_names = PackedStringArray("LT Wave Text")
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_y3a5i"]
+HSlider/icons/grabber = ExtResource("1_a64ab")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_h7bam")
+Label/colors/font_color = Color(0.79607844, 0.18431373, 0.3372549, 1)
+Label/font_sizes/font_size = 29
+Label/fonts/font = SubResource("SystemFont_a64ab")
+
+[sub_resource type="Resource" id="Resource_y3a5i"]
+script = ExtResource("3_u56kn")
+
+[node name="WaveControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = SubResource("Theme_y3a5i")
+script = ExtResource("1_opshw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 155.22)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.34, 0.22779998, 0.25585, 1)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="ColorRect/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 1945.0
+offset_bottom = 165.0
+theme_override_constants/separation = 22
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(322, 160)
+render_target_update_mode = 4
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="WaveCreator" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_2kc0d")]
+position = Vector2(0, 82.21997)
+scale = Vector2(0.14, 0.14)
+waves = Array[ExtResource("3_u56kn")]([SubResource("Resource_y3a5i")])
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.31573507, 0.97, 0.28130004, 0.28235295)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_u56kn")
+
+[node name="LaunchButton" type="Button" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_eho6i")
+theme_override_font_sizes/font_size = 28
+text = "Launch"
+icon = ExtResource("6_h7bam")
+flat = true
+icon_alignment = 1
+
+[node name="RemoveWave" type="Button" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("5_eho6i")
+text = "-"
+icon = ExtResource("7_h7bam")
+icon_alignment = 1
+
+[node name="AddWave" type="Button" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("5_eho6i")
+text = "+"
+icon = ExtResource("7_h7bam")
+icon_alignment = 1
+
+[node name="Wave1Container" type="VBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+custom_minimum_size = Vector2(399, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container"]
+layout_mode = 2
+text = "WAVE 1"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Amplitude" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Amplitude"
+
+[node name="Wave1AmplitudeSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+min_value = 30.0
+max_value = 400.0
+value = 100.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Length" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Length"
+
+[node name="Wave1LengthSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+min_value = 100.0
+max_value = 500.0
+value = 200.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Offset" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Offset
+"
+
+[node name="Wave1OffsetSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave1Container/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+max_value = 10.0
+step = 0.1
+
+[node name="Wave2Container" type="VBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(399, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container"]
+layout_mode = 2
+text = "WAVE 2"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Amplitude" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Amplitude"
+
+[node name="Wave2AmplitudeSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+min_value = 30.0
+max_value = 400.0
+value = 100.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Length" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Length"
+
+[node name="Wave2LengthSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+min_value = 100.0
+max_value = 500.0
+value = 200.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Offset" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Offset
+"
+
+[node name="Wave2OffsetSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave2Container/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+max_value = 10.0
+step = 0.1
+
+[node name="Wave3Container" type="VBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(399, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container"]
+layout_mode = 2
+text = "WAVE 3"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Amplitude" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Amplitude"
+
+[node name="Wave3AmplitudeSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+min_value = 30.0
+max_value = 400.0
+value = 100.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Length" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Length"
+
+[node name="Wave3LengthSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+min_value = 100.0
+max_value = 500.0
+value = 200.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Offset" type="Label" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Offset
+"
+
+[node name="Wave3OffsetSlider" type="HSlider" parent="ColorRect/HBoxContainer2/Control/HBoxContainer/Wave3Container/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+max_value = 10.0
+step = 0.1
+
+[node name="VSeparator" type="VSeparator" parent="ColorRect/HBoxContainer2/Control/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="StopClickRect" type="ColorRect" parent="ColorRect/HBoxContainer2/Control"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 155)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.34, 0.34, 0.34, 0.6901961)
+
+[node name="Scores" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="Score" type="Label" parent="Scores"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -209.0
+offset_right = 110.0
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Score: 10000"
+horizontal_alignment = 1
+
+[node name="Exit" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 18.0
+offset_right = 118.0
+offset_bottom = 112.0
+theme = ExtResource("5_eho6i")
+icon = ExtResource("9_y3a5i")
