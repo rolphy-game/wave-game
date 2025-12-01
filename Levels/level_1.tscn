@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://c82cn0yefvsfe"]
+
+[ext_resource type="Script" uid="uid://d4bmyo4r7uy3h" path="res://Levels/level.gd" id="1_0urlm"]
+[ext_resource type="PackedScene" uid="uid://bevbr4ech1hrj" path="res://Ending/ending.tscn" id="1_n0qsc"]
+[ext_resource type="PackedScene" uid="uid://ugw4wvj6cf5n" path="res://Waves/wave_creator.tscn" id="2_3mhv4"]
+[ext_resource type="Script" uid="uid://d0g023v4mkb4x" path="res://Waves/wave.gd" id="3_rf6l5"]
+[ext_resource type="PackedScene" uid="uid://8ofu3f76cyvh" path="res://Bonus/first_bonus.tscn" id="4_rfktq"]
+[ext_resource type="PackedScene" uid="uid://25s3yrp6i1fq" path="res://Bonus/second_bonus.tscn" id="5_0urlm"]
+[ext_resource type="PackedScene" uid="uid://nmh3y6hkmy5d" path="res://Bonus/third_bonus.tscn" id="6_77x7w"]
+[ext_resource type="PackedScene" uid="uid://df2uipwqakwwc" path="res://Waves/wave_control.tscn" id="8_77x7w"]
+
+[sub_resource type="Resource" id="Resource_77x7w"]
+script = ExtResource("3_rf6l5")
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_0urlm")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer2"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9607843, 0.6431373, 0.72156864, 1)
+
+[node name="Bonuses" type="Node2D" parent="."]
+
+[node name="Bonus1" parent="Bonuses" instance=ExtResource("4_rfktq")]
+position = Vector2(785, 351)
+
+[node name="Bonus2" parent="Bonuses" instance=ExtResource("5_0urlm")]
+position = Vector2(1338, 565)
+
+[node name="Bonus3" parent="Bonuses" instance=ExtResource("6_77x7w")]
+position = Vector2(1679, 69)
+
+[node name="Ending" parent="." instance=ExtResource("1_n0qsc")]
+position = Vector2(1793, 427)
+
+[node name="WaveCreator" parent="." instance=ExtResource("2_3mhv4")]
+unique_name_in_owner = true
+position = Vector2(0, 423)
+bullet_speed = 1500
+waves = Array[ExtResource("3_rf6l5")]([SubResource("Resource_77x7w")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WaveControl" parent="CanvasLayer" instance=ExtResource("8_77x7w")]
+unique_name_in_owner = true

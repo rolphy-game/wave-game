@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4am63v3bix13"]
+
+[ext_resource type="Script" uid="uid://bo85i0170b0vy" path="res://Music/music.gd" id="1_8eoea"]
+[ext_resource type="AudioStream" uid="uid://torufvwosyq5" path="res://Music/Screen Saver.mp3" id="1_dtreh"]
+[ext_resource type="AudioStream" uid="uid://8vueshdocisa" path="res://Music/Meditating Beat.mp3" id="2_8eoea"]
+[ext_resource type="AudioStream" uid="uid://cwb345iddtlnv" path="res://Music/blipSelect.wav" id="4_kut1s"]
+[ext_resource type="AudioStream" uid="uid://c8qntrvs8t1ct" path="res://Music/MESSAGE-B_Accept.wav" id="5_n5f2h"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kut1s"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("4_kut1s")
+
+[node name="Music" type="Node2D"]
+script = ExtResource("1_8eoea")
+
+[node name="Title" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_dtreh")
+autoplay = true
+
+[node name="Game" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_8eoea")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_kut1s")
+volume_db = -5.0
+
+[node name="CollectBonus" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_n5f2h")
+pitch_scale = 1.5

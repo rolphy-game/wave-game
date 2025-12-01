@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://820bmm8vpqu2"]
+
+[ext_resource type="Script" uid="uid://d4bmyo4r7uy3h" path="res://Levels/level.gd" id="1_ben3k"]
+[ext_resource type="PackedScene" uid="uid://8ofu3f76cyvh" path="res://Bonus/first_bonus.tscn" id="2_77xid"]
+[ext_resource type="PackedScene" uid="uid://25s3yrp6i1fq" path="res://Bonus/second_bonus.tscn" id="3_m0m22"]
+[ext_resource type="PackedScene" uid="uid://nmh3y6hkmy5d" path="res://Bonus/third_bonus.tscn" id="4_utic7"]
+[ext_resource type="PackedScene" uid="uid://bevbr4ech1hrj" path="res://Ending/ending.tscn" id="5_x4mg1"]
+[ext_resource type="PackedScene" uid="uid://ugw4wvj6cf5n" path="res://Waves/wave_creator.tscn" id="6_6iucq"]
+[ext_resource type="Script" uid="uid://d0g023v4mkb4x" path="res://Waves/wave.gd" id="7_fcg6d"]
+[ext_resource type="PackedScene" uid="uid://d4dn50k0ijxyh" path="res://Laser_Wall/laser_wall.tscn" id="8_3227t"]
+[ext_resource type="PackedScene" uid="uid://df2uipwqakwwc" path="res://Waves/wave_control.tscn" id="9_lk1ng"]
+
+[sub_resource type="Resource" id="Resource_ben3k"]
+script = ExtResource("7_fcg6d")
+
+[node name="Level4" type="Node2D"]
+script = ExtResource("1_ben3k")
+max_wave = 2
+max_waves_amplitude = 200
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer2"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9607843, 0.6431373, 0.72156864, 1)
+
+[node name="Bonuses" type="Node2D" parent="."]
+
+[node name="Bonus1" parent="Bonuses" instance=ExtResource("2_77xid")]
+position = Vector2(899, 470)
+
+[node name="Bonus2" parent="Bonuses" instance=ExtResource("3_m0m22")]
+position = Vector2(1329, 510)
+
+[node name="Bonus3" parent="Bonuses" instance=ExtResource("4_utic7")]
+position = Vector2(1450, 265)
+
+[node name="Ending" parent="." instance=ExtResource("5_x4mg1")]
+position = Vector2(1793, 518)
+
+[node name="WaveCreator" parent="." instance=ExtResource("6_6iucq")]
+unique_name_in_owner = true
+position = Vector2(0, 514)
+bullet_speed = 1500
+waves = Array[ExtResource("7_fcg6d")]([SubResource("Resource_ben3k")])
+
+[node name="LaserWall" parent="." instance=ExtResource("8_3227t")]
+position = Vector2(899, 405)
+
+[node name="LaserWall2" parent="." instance=ExtResource("8_3227t")]
+position = Vector2(899, 639)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WaveControl" parent="CanvasLayer" instance=ExtResource("9_lk1ng")]
+unique_name_in_owner = true

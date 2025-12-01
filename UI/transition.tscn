@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://lonis0f5gsor"]
+
+[ext_resource type="Script" uid="uid://d1vhgeee4lsd5" path="res://UI/transition.gd" id="1_inf52"]
+[ext_resource type="Texture2D" uid="uid://b43kcxd12a4qt" path="res://UI/Sprites/transition.png" id="2_x2rwd"]
+
+[sub_resource type="Animation" id="Animation_64y4x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2500, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x2rwd"]
+resource_name = "in"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(-2500, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_253a1"]
+resource_name = "out"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2500, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rvpx"]
+_data = {
+&"RESET": SubResource("Animation_64y4x"),
+&"in": SubResource("Animation_x2rwd"),
+&"out": SubResource("Animation_253a1")
+}
+
+[node name="Transition" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_inf52")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2500, 0)
+texture = ExtResource("2_x2rwd")
+centered = false
+offset = Vector2(-300, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_7rvpx")
+}

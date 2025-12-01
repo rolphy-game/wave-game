@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv242dl3n4dyh"]
+
+[ext_resource type="Theme" uid="uid://msjsp8wfk88q" path="res://UI/button_theme.tres" id="1_5kgiy"]
+[ext_resource type="Script" uid="uid://7xou1eyhc1k3" path="res://UI/dead_screen.gd" id="1_avx75"]
+[ext_resource type="Texture2D" uid="uid://dxqc0gditao56" path="res://UI/Sprites/death_menu.png" id="3_d46c2"]
+
+[sub_resource type="SystemFont" id="SystemFont_7sk72"]
+font_names = PackedStringArray("LT Wave Text")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_t6kwp"]
+font = SubResource("SystemFont_7sk72")
+font_size = 46
+
+[node name="DeadScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5kgiy")
+script = ExtResource("1_avx75")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1222.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 550
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 550
+theme_override_constants/margin_bottom = 300
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_d46c2")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 35
+
+[node name="BestScore" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TOO BAD :("
+label_settings = SubResource("LabelSettings_t6kwp")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 43
+
+[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "RESTART"
+icon_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "MAIN
+MENU"
+icon_alignment = 1

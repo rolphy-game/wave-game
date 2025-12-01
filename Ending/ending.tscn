@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bevbr4ech1hrj"]
+
+[ext_resource type="Script" uid="uid://ce5l7i6avti0x" path="res://Ending/ending.gd" id="1_6epc7"]
+[ext_resource type="Texture2D" uid="uid://bqv5im3myy38h" path="res://Ending/ending.png" id="1_kkg7v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eku6g"]
+radius = 18.110771
+
+[node name="Ending" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_6epc7")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_kkg7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eku6g")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
